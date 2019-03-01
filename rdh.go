@@ -1,7 +1,7 @@
 package rdh
 
 import (
-    "strings"
+    "reflect"
     "time"
     "github.com/go-redis/redis"
 )
