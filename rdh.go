@@ -65,7 +65,7 @@ func Init(addrs []string, passwd string) error {
     return nil
 }
 
-func Call(name string, params ... interface{}) (result []reflect.Value, err error) {
+func Call(name string, params ... interface{}) (res interface{}, err error) {
     if _, ok := RcNames[name]; !ok {
         return nil, errors.New(name + " does not exist.")
     }
@@ -73,6 +73,6 @@ func Call(name string, params ... interface{}) (result []reflect.Value, err erro
     for k, param := range params {
         in[k] = reflect.ValueOf(param)
     }
-    result = RcNames[name].Call(in)
-    return
+    ov := RcNames[name].Call(in) //[]reflect.Value
+    return ov[0].Interface(), nil
 }
